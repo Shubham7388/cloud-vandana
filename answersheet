@@ -1,0 +1,131 @@
+****JAVA****
+1.  Create an array with the values (1, 2, 3, 4, 5, 6, 7) and shuffle it.
+
+import java.util.Random;
+
+public class ShuffleArray {
+    public static void main(String[] args) {
+        int[] array = {1, 2, 3, 4, 5, 6, 7};
+        shuffleArray(array);
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+    }
+    private static void shuffleArray(int[] array) {
+        Random random = new Random();
+        for (int i = array.length - 1; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+}
+
+2.Enter a Roman Number as input and convert it to an integer. (ex IX = 9) 
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class RomanToInteger {
+    public static void main(String[] args) {
+        System.out.println(romanToInt("IX"));
+    }
+
+    public static int romanToInt(String s) {
+        Map<Character, Integer> romanMap = new HashMap<>();
+        romanMap.put('I', 1);
+        romanMap.put('V', 5);
+        romanMap.put('X', 10);
+        romanMap.put('L', 50);
+        romanMap.put('C', 100);
+        romanMap.put('D', 500);
+        romanMap.put('M', 1000);
+        int result = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int currentVal = romanMap.get(s.charAt(i));
+            if (i < s.length() - 1 && romanMap.get(s.charAt(i + 1)) > currentVal) {
+                result -= currentVal;
+            } else {
+                result += currentVal;
+            }
+        }
+        return result;
+    }
+}
+
+3. Check if the input is pangram or not. (Pangram is a sentence that contains all the alphabet
+from a-z) 
+
+public class Main {
+    public static void main(String[] args) {
+        String input = "The quick brown fox jumps over the lazy dog";
+        System.out.println(isPangram(input)); 
+    }
+
+    public static boolean isPangram(String s) {
+        s = s.toLowerCase();
+        boolean[] alphabet = new boolean[26];
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c >= 'a' && c <= 'z') {
+                if (alphabet[c - 'a']) {
+                    System.out.println("Duplicate letter: " + c);
+                    return false;
+                }
+                alphabet[c - 'a'] = true;
+            }
+        }
+
+        return true;
+    }
+}
+
+****JAVASCRIPT****
+
+A. Take a sentence as an input and reverse every word in that sentence.
+a. Example - This is a sunny day > shiT si a ynnus yad.
+
+function reverseWords(sentence) {
+  const words = sentence.split(' ');
+
+  const reversedWords = words.map(word => {
+    return word.split('').reverse().join('');
+  });
+
+  const reversedSentence = reversedWords.join(' ');
+
+  return reversedSentence;
+}
+const inputSentence = "This is a sunny day";
+const reversedResult = reverseWords(inputSentence);
+console.log(reversedResult);  
+
+
+B. Perform sorting of an array in descending order. 
+
+function bubbleSortDescending(array) {
+  const length = array.length;
+
+  for (let i = 0; i < length - 1; i++) {
+    for (let j = 0; j < length - 1 - i; j++) {
+      if (array[j] < array[j + 1]) {
+        const temp = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = temp;
+      }
+    }
+  }
+
+  return array;
+}
+
+// Example usage:
+const inputArray = [4, 2, 7, 1, 9, 5];
+const sortedResult = bubbleSortDescending(inputArray);
+console.log(sortedResult);  // Output: [9, 7, 5, 4, 2, 1]
+
+
+
+
